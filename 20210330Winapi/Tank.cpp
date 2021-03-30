@@ -24,7 +24,6 @@ HRESULT Tank::Init()
 	{
 		missile[i].Init();
 	}
-
 	//for (int i = 0; i < missileCount; i++)
 	//{
 	//	missile[i] = new Missile();
@@ -57,6 +56,26 @@ void Tank::Release()
 
 void Tank::Update()
 {
+	if (KeyManager::Getsingleton()->IsOnceKeyDown('G')) 
+	{
+		/*FireSkill_02();*/
+	}
+	else if (KeyManager::Getsingleton()->IsOnceKeyDown('F')) 
+	{
+		FireSkill_01();
+	}
+	else if (KeyManager::Getsingleton()->IsOnceKeyDown(VK_SPACE)) 
+	{
+		Fire();
+	}
+	if (KeyManager::Getsingleton()->IsStayKeyDown(VK_LEFT)) 
+	{
+		RotateBarrel(0.07f);
+	}
+	else if (KeyManager::Getsingleton()->IsStayKeyDown(VK_RIGHT)) 
+	{
+		RotateBarrel(-0.07f);
+	}
 	// 포신 각도에 따른 좌표 계산
 	barrelEnd.x = pos.x + cosf(barrelAngle) * barrelSize;
 	barrelEnd.y = pos.y - (sinf(barrelAngle) * barrelSize);

@@ -4,6 +4,7 @@
 #include "Missile.h"
 HRESULT MainGame::Init()
 {
+	KeyManager::Getsingleton()->Init();
 	// 메인게임의 초기화 함수
 	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 10, NULL);
 	index = 0;
@@ -33,6 +34,7 @@ HRESULT MainGame::Init()
 
 void MainGame::Release()
 {
+	KeyManager::Getsingleton()->Release();
 	for (int i = 0; i < enemyCount; i++)
 		enemy[i].Release();
 	delete[] enemy;
@@ -47,14 +49,16 @@ void MainGame::Release()
 
 void MainGame::Update()
 {
+	//if (KeyManager::Getsingleton()->IsOnceKeyUp(VK_SPACE))
+	//{
+	//	MessageBox(g_hWnd, "스페이스바가 눌렸다", "키확인", MB_OK);
+	//}
 	if (tank) 
 	{
 		tank->Update();
-		
 	}
 	if (enemy) 
 	{
-
 		for (int i = 0; i < enemyCount; i++)
 		{
 			enemy[i].Update();
@@ -192,49 +196,6 @@ LRESULT MainGame::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 		{
 			this->Update();
 		}
-		break;
-	case WM_KEYDOWN:
-		switch (wParam)
-		{
-		case 'f': case 'F':
-			if (tank) 
-			{
-				tank->FireSkill_01();
-				SetMissileTarget();
-			}
-			break;
-		case'q':case'Q':
-			if (tank) 
-			{
-				if (enemyCount > index)
-				{
-					tank->FireSkill_02(&enemy[index]);
-					index++;
-				}
-			}
-			break;
-		case VK_LEFT:
-			if(tank)
-			tank->RotateBarrel(0.07f);
-			break;
-		case VK_RIGHT:
-			if(tank)
-			tank->RotateBarrel(-0.07f);
-			break;
-		case VK_SPACE:
-			// 미사일 발사 - tank
-			if(tank)
-			tank->Fire();
-			break;
-		}
-		break;
-	case WM_LBUTTONDOWN:
-		break;
-	case WM_LBUTTONUP:
-		break;
-	case WM_RBUTTONDOWN:
-		break;
-	case WM_MOUSEMOVE:
 		break;
 	case WM_PAINT:
 		hdc = BeginPaint(g_hWnd, &ps);

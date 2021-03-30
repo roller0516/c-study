@@ -6,6 +6,9 @@
 #include <string>
 #include <ctime>
 #include <cmath>
+#include <bitset> // 데이터 자체가 비트로 표현되어 저장할수있는 자료구조
+
+#include "KeyManager.h"
 
 using namespace std;
 
