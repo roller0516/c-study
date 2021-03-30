@@ -1,5 +1,6 @@
 #pragma once
 #include "GameNode.h"
+
 //#include "MainGame.h"
 //#include "Missile.h"
 
@@ -15,18 +16,15 @@ class Tank : public GameNode
 private: // 비밀
 	// 속성 : 멤버변수
 	FPOINT pos;
-
 	int size;
 	float attackValue;
 	string name;
 	RECT shape;
-
 	// 포신
 	// 포신의 시작점, 끝점
 	FPOINT barrelEnd;
 	int barrelSize;
 	float barrelAngle;	
-
 	// 미사일
 	int missileCount;
 	Missile* missile;		// 2
