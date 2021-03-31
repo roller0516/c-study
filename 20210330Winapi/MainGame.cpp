@@ -2,6 +2,7 @@
 #include "Tank.h"
 #include "Enemy.h"
 #include "Missile.h"
+#include "Image.h"
 HRESULT MainGame::Init()
 {
 	KeyManager::Getsingleton()->Init();
@@ -9,6 +10,8 @@ HRESULT MainGame::Init()
 	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 10, NULL);
 	index = 0;
 	tank = new Tank();
+	bin = new Image();
+	bin->Init("Image/bin.bmp",1400,933);
 	tank->Init();
 	FPOINT randPos;
 	srand(time(NULL));
@@ -35,6 +38,9 @@ HRESULT MainGame::Init()
 void MainGame::Release()
 {
 	KeyManager::Getsingleton()->Release();
+	bin->Release();
+	delete bin;
+	bin = nullptr;
 	for (int i = 0; i < enemyCount; i++)
 		enemy[i].Release();
 	delete[] enemy;
@@ -49,10 +55,6 @@ void MainGame::Release()
 
 void MainGame::Update()
 {
-	//if (KeyManager::Getsingleton()->IsOnceKeyUp(VK_SPACE))
-	//{
-	//	MessageBox(g_hWnd, "스페이스바가 눌렸다", "키확인", MB_OK);
-	//}
 	if (tank) 
 	{
 		tank->Update();
@@ -72,6 +74,11 @@ void MainGame::Update()
 
 void MainGame::Render(HDC hdc)
 {
+	if (bin) 
+	{
+		bin->Render(hdc);
+	}
+	
 	// 인사
 	TextOut(hdc, 20, 20, "MainGame 렌더 중", strlen("MainGame 렌더 중"));
 	// 마우스 좌표

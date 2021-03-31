@@ -3,6 +3,7 @@
 
 class Tank;
 class Enemy;
+class Image;
 class MainGame : public GameNode
 {
 private:
@@ -22,6 +23,7 @@ private:
 
 	Tank* tank;
 	Enemy* enemy;
+	Image* bin;
 	//EnemyTank* Enemy;
 
 public:

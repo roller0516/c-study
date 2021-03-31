@@ -42,6 +42,9 @@
     <ClCompile Include="KeyManager.cpp">
       <Filter>2DFramWork</Filter>
     </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>2DFramWork</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonFunction.h">
@@ -69,6 +72,9 @@
       <Filter>2DFramWork</Filter>
     </ClInclude>
     <ClInclude Include="Singleton.h">
+      <Filter>2DFramWork</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
       <Filter>2DFramWork</Filter>
     </ClInclude>
   </ItemGroup>
