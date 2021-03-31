@@ -142,7 +142,9 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="Iori.cpp" />
     <ClCompile Include="KeyManager.cpp" />
+    <ClCompile Include="kusanagi.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Missile.cpp" />
@@ -154,7 +156,9 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="Iori.h" />
     <ClInclude Include="KeyManager.h" />
+    <ClInclude Include="kusanagi.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Missile.h" />
     <ClInclude Include="Singleton.h" />

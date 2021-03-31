@@ -77,3 +77,20 @@ void Image::Render(HDC hdc)
 		SRCCOPY				
 		); //BITMAP에 있는 이미지 정보를 다른 비트맵에 복사
 }
+
+void Image::Render(HDC hdc, int destX, int destY, int frameIndex, int piece)
+{	BitBlt(
+		hdc,
+		destX, destY,
+		(imageInfo->width / piece),
+		imageInfo->height,
+		imageInfo->hMemDC,
+		(imageInfo->width / piece) * (frameIndex), 0,
+		SRCCOPY
+	);
+}
+
+void Image::SetImage(const char* fileName,int width,int height)
+{
+	imageInfo->hBitmap = (HBITMAP)LoadImage(g_hInstance, fileName, IMAGE_BITMAP, width, height, LR_LOADFROMFILE);
+}

@@ -41,5 +41,15 @@ public:
 	HRESULT Init(const char* fileName, int width, int height);
 	void Release();
 	void Render(HDC hdc);
+	void Render(HDC hdc, int destX, int destY, int frameIndex,int piece);
+
+	void SetImage(const char* fileName, int width, int height);
+
+	HDC GetMemDC() 
+	{
+		if (this->imageInfo)
+			return this->imageInfo->hMemDC;
+		return NULL;
+	}
 };
 

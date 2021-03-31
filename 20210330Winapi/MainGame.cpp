@@ -3,16 +3,32 @@
 #include "Enemy.h"
 #include "Missile.h"
 #include "Image.h"
+#include "Iori.h"
+#include "kusanagi.h"
 HRESULT MainGame::Init()
 {
 	KeyManager::Getsingleton()->Init();
 	// 메인게임의 초기화 함수
 	hTimer = (HANDLE)SetTimer(g_hWnd, 0, 10, NULL);
 	index = 0;
+
+	kusanagi = new Kusanagi();
+	kusanagi->Init();
+
+	backBuffer = new Image();
+	backBuffer->Init(WINSIZE_X, WINSIZE_Y);
+
 	tank = new Tank();
-	bin = new Image();
-	bin->Init("Image/bin.bmp",1400,933);
 	tank->Init();
+
+	bin = new Image();
+	bin->Init("Image/bin.bmp", WINSIZE_X, WINSIZE_Y);
+	
+	iori = new Iori();
+	iori->Init();
+
+	
+
 	FPOINT randPos;
 	srand(time(NULL));
 	enemyCount = 36;
@@ -27,20 +43,27 @@ HRESULT MainGame::Init()
 		enemy[i].SetPos(randPos);
 	}
 
-	Stage = 1;
-	MaxMonsterCount = 1;
-	MonsterCount = MaxMonsterCount;
 	isInited = true;
-	GameStart = true;
+
 	return S_OK;
 }
 
 void MainGame::Release()
 {
 	KeyManager::Getsingleton()->Release();
+
+	kusanagi->Release();
+	delete kusanagi;
+	kusanagi = nullptr;
+
+	backBuffer->Release();
+	delete backBuffer;
+	backBuffer = nullptr;
+
 	bin->Release();
 	delete bin;
 	bin = nullptr;
+
 	for (int i = 0; i < enemyCount; i++)
 		enemy[i].Release();
 	delete[] enemy;
@@ -49,6 +72,10 @@ void MainGame::Release()
 	tank->Release();
 	delete tank;
 	tank = nullptr;
+
+	iori->Release();
+	delete iori;
+	iori = nullptr;
 
 	KillTimer(g_hWnd, 0);
 }
@@ -66,38 +93,49 @@ void MainGame::Update()
 			enemy[i].Update();
 		}
 	}
-	SetGame();
+	if (iori)
+		iori->Update();
+	if (kusanagi)
+		kusanagi->Update();
 	CheckCollision();
 	//EnemyTarget();
-	InvalidateRect(g_hWnd, NULL, true);
+	InvalidateRect(g_hWnd, NULL, false);
 }
 
 void MainGame::Render(HDC hdc)
 {
-	if (bin) 
+	HDC hBackDC = backBuffer->GetMemDC();
+
+	if (bin)
 	{
-		bin->Render(hdc);
+		bin->Render(hBackDC);
 	}
 	
 	// 인사
-	TextOut(hdc, 20, 20, "MainGame 렌더 중", strlen("MainGame 렌더 중"));
+	TextOut(hBackDC, 20, 20, "MainGame 렌더 중", strlen("MainGame 렌더 중"));
 	// 마우스 좌표
 	wsprintf(szText, "X : %d, Y : %d", ptMouse.x, ptMouse.y);
-	TextOut(hdc, 200, 20, szText, strlen(szText));
-	wsprintf(szText, "현재스테이지 : %d", Stage);
-	TextOut(hdc, 500, 20, szText, strlen(szText));
-	wsprintf(szText, "MonsterCount : %d", MonsterCount);
-	TextOut(hdc, 700,20, szText, strlen(szText));
+	TextOut(hBackDC, 200, 20, szText, strlen(szText));
+	TextOut(hBackDC, 500, 20, szText, strlen(szText));
+	TextOut(hBackDC, 700,20, szText, strlen(szText));
 	if (enemy) 
 	{
 		for (int i = 0; i < enemyCount; i++)
-			enemy[i].Render(hdc);
+			enemy[i].Render(hBackDC);
 	}
 		
 	if (tank) 
 	{
-		tank->Render(hdc);
+		tank->Render(hBackDC);
 	}
+
+	if (kusanagi)
+		kusanagi->Render(hBackDC);
+
+	if(iori)
+		iori->Render(hBackDC);
+
+	backBuffer->Render(hdc);
 }
 
 void MainGame::CheckCollision()
