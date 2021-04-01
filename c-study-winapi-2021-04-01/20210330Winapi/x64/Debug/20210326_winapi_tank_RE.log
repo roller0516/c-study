@@ -1,0 +1,18 @@
+﻿  DuoLon.cpp
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(22,43): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(22,32): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(162,51): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(162,43): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(197,28): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(198,28): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(212,28): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(213,28): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(227,28): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(228,28): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(242,28): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(243,28): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(264,29): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(265,28): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(266,30): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\DuoLon.cpp(267,31): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  20210326_winapi_tank_RE.vcxproj -> C:\Users\hope\Desktop\c-study-winapi-2021-04-01\20210330Winapi\x64\Debug\20210326_winapi_tank_RE.exe
