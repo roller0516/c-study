@@ -5,15 +5,19 @@ using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
-    public Animator ani;
-    public Camera camera;
-    public NavMeshAgent agent;
+    public float MaxDistance;
+
+    public int playerAttack;
+
+    NavMeshAgent agent;
+    new Camera camera;
+    Animator ani;
+    GameObject target;
 
     bool isMove;
     bool isFind;
 
-    float MaxDistance = 10;
-    float angle;
+    RaycastHit hit;
 
     Vector3 destPos;
 
@@ -24,10 +28,9 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        angle = 0.0f;
         ani = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
+        playerAttack = 10;
     }
 
     // Update is called once per frame
@@ -40,32 +43,30 @@ public class Player : MonoBehaviour
 
             x.x = Input.mousePosition.x;
             x.y = Input.mousePosition.y;
-            Ray ray = camera.ScreenPointToRay(new Vector3(x.x, x.y, 0));
-            RaycastHit hit;
+
+            Ray ray = camera.ScreenPointToRay(new Vector3(x.x, x.y, 0));//¹Ù´Ú
+
             if (Physics.Raycast(ray, out hit))
             {
-                SetDestPos(hit.point);
-            }
-        }
-        else 
-        {
-            RaycastHit hit2;
-            if (Physics.Raycast(transform.position, transform.forward, out hit2, MaxDistance))
-            {
-                if (hit2.transform.gameObject.tag == "Monster")
+                if (hit.transform.gameObject.tag == "Monster")
                 {
-                    ani.SetInteger("StateIndex", 2);
-                    print("hit");
-                    Debug.DrawRay(transform.position, transform.forward * MaxDistance, Color.red, 0.3f);
+                    target = hit.transform.gameObject;
+                    isMove = false;
+                    SetDestPos(target.transform.position);
+                }
+                else 
+                {
+                    SetDestPos(hit.transform.position);
+                    //agent.isStopped = false;
                 }
             }
         }
-        
-        
+
 
         if (isMove)
             Move();
-            
+        if(isFind)
+            Attack();
     }
 
     void Move() 
@@ -74,12 +75,24 @@ public class Player : MonoBehaviour
         {
             isMove = false;
             ani.SetInteger("StateIndex", 0);
+            //agent.isStopped = true;
+            return;
+        }
+        if (Vector3.Distance(target.transform.position, this.transform.position) < MaxDistance)
+        {
+            isFind = true;
+            agent.speed = 0;
             return;
         }
         ani.SetInteger("StateIndex", 1);
         var dir = new Vector3(agent.steeringTarget.x, this.transform.position.y,
             agent.steeringTarget.z) - this.transform.position;
         this.transform.forward = dir;
+    }
+
+    void Attack() 
+    {
+        ani.SetInteger("StateIndex", 2);
     }
     void SetDestPos(Vector3 dest) //µµÂøÁöÁ¡
     {
