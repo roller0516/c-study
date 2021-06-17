@@ -9,7 +9,7 @@ public class BackgroundLoop : MonoBehaviour
     private void Awake()
     {
         BoxCollider backGroundCollider = GetComponent<BoxCollider>();
-        width = backGroundCollider.size.x;
+        width = backGroundCollider.size.x*100;
 
     }
     void Start()
@@ -20,7 +20,7 @@ public class BackgroundLoop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.x <= -width) 
+        if (this.transform.position.x <= -width) 
         {
             RePosition();
         }
@@ -28,7 +28,7 @@ public class BackgroundLoop : MonoBehaviour
     }
     void RePosition() 
     {
-        Vector3 offset = new Vector3(100, -0.2f, -0.9f);
-        transform.position = offset;
+        Vector3 offset = new Vector3(width*2f-1,0,0);
+        this.transform.position = (Vector3)this.transform.position +offset;
     }
 }
