@@ -11,7 +11,8 @@ public class CubeSpawner : MonoBehaviour
 
     LevelCtrl levelCtrl;
     List<LevelData> levelDatas;
-
+    [SerializeField] int Spawnpercentage;
+    float spawnTime;
     Vector3 lastCubePos;
 
     // Start is called before the first frame update
@@ -21,11 +22,14 @@ public class CubeSpawner : MonoBehaviour
         levelCtrl.LoadData();
         levelDatas = levelCtrl.levelDatas;
         lastCubePos = new Vector3(0f, 0f, 0f);
+        Spawnpercentage = Random.Range(0, 10);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.instance.isDead)
+            return;
         if (level == 4) 
         {
             level = 4;
@@ -34,7 +38,15 @@ public class CubeSpawner : MonoBehaviour
         {
             level++;
         }
-        //GameManager.instance.MoveSpeed = levelCtrl.levelDatas[level].speed; 
+        spawnTime += Time.deltaTime;
+        if (spawnTime> Spawnpercentage) 
+        {
+            spawnTime = 0;
+            Spawnpercentage = Random.Range(0, 10);
+            ObjectPool.instance.SpawnFromPool("Obstacle", new Vector3(15, -2, 0), Quaternion.Euler(0, -90, 0));
+        }
+
+        GameManager.instance.MoveSpeed = levelCtrl.levelDatas[level].speed; 
         if (GameManager.instance.MovedValue > lastCubePos.x - 20)
         {
             // 큐브 9개를 생성
@@ -43,26 +55,10 @@ public class CubeSpawner : MonoBehaviour
             int randY     = Random.Range(levelDatas[level].heightMin, levelDatas[level].heightMax);
             for (int i = 0; i < randCount; i++)
             {
-               GameObject platForm = ObjectPool.instance.SpawnFromPool("PlatForm", lastCubePos
+               ObjectPool.instance.SpawnFromPool("Floor", lastCubePos
                 + new Vector3(i - GameManager.instance.MovedValue, randY), Quaternion.Euler(0,90,0));
-
-                renderer = platForm.GetComponent<Renderer>();
-                switch (level)
-                {
-                    case 0:
-                        renderer.material.color = new Color(255, 0, 0, 150);
-                        break;
-                    case 1:
-                        renderer.material.color = new Color(0, 255, 0, 150);
-                        break;
-                    case 2:
-                        renderer.material.color = new Color(0, 0, 255, 150);
-                        break;
-                    case 3:
-                        renderer.material.color = new Color(255, 255, 255, 150);
-                        break;
-                }
-
+               ObjectPool.instance.SpawnFromPool("Item", lastCubePos
+               + new Vector3(i - GameManager.instance.MovedValue, randY+1), Quaternion.Euler(90, 0, 0));
             }
             lastCubePos = lastCubePos + new Vector3(holeCount+ randCount, 0f);
         }

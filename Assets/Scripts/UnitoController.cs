@@ -11,7 +11,7 @@ public class UnitoController : MonoBehaviour
     new SphereCollider collider;
     Animator animator;
 
-    float jumpPower = 700f;
+    public float jumpPower = 700f;
     float maxJumpPower = 700f;
 
     int jumpCount = 0;
@@ -118,13 +118,15 @@ public class UnitoController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Dead" && isDead)
+        if (other.tag == "Dead" && !isDead)
         {
             Die();
+            GameManager.instance.isDead = true;
         }
         if (other.tag == "Item" )
         {
             GameManager.instance.Score += 1;
+            ObjectPool.instance.ReturnToPool("Item", other.gameObject);
         }
     }
 

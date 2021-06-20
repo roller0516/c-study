@@ -30,9 +30,12 @@ public class AutoDissolve : MonoBehaviour
     void Update()
     {
 
-        if (gameObject.transform.position.x < -1) 
-            ObjectPool.instance.ReturnToPool("PlatForm", gameObject);
-
+        if (gameObject.transform.position.x < -10) 
+        {
+            ObjectPool.instance.ReturnToPool("Floor", gameObject);
+            //isDissolve = true;
+        }
+       
         if (!isDissolve) return;
 
         foreach(var meshRenderer in meshRenderers)
@@ -50,9 +53,9 @@ public class AutoDissolve : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player" && !isDissolve)
-        {
-            isDissolve = true;
-        }
+        //if (collision.gameObject.tag == "Player" && !isDissolve)
+        //{
+        //    isDissolve = true;
+        //}
     }
 }
