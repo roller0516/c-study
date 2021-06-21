@@ -8,7 +8,7 @@ public class CubeSpawner : MonoBehaviour
 
     Renderer renderer;
     [SerializeField] int level = 0;
-
+    float timer;
     LevelCtrl levelCtrl;
     List<LevelData> levelDatas;
     [SerializeField] int Spawnpercentage;
@@ -28,13 +28,14 @@ public class CubeSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer += Time.deltaTime;
         if (GameManager.instance.isDead)
             return;
         if (level == 4) 
         {
             level = 4;
         }
-        else if (Time.time >= levelDatas[level + 1].time)
+        else if (timer >= levelDatas[level + 1].time)
         {
             level++;
         }

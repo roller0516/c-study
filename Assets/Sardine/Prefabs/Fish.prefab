@@ -1364,7 +1364,7 @@ Transform:
   m_GameObject: {fileID: 1428778655565627019}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 1428778655565312879}
   - {fileID: 1428778655565330991}
@@ -1418,7 +1418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 039a2d8b5ec918c45b958b9967a268bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPower: 30
+  speed: 5
 --- !u!136 &1910944696614380105
 CapsuleCollider:
   m_ObjectHideFlags: 0

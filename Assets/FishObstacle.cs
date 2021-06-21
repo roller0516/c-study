@@ -7,7 +7,7 @@ public class FishObstacle : MonoBehaviour
     // Start is called before the first frame update
     Rigidbody rigid;
 
-    public float jumpPower;
+    public float speed;
     bool isAlive;
     void Start()
     {
@@ -18,13 +18,16 @@ public class FishObstacle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       transform.Translate(Vector3.left * 5 * Time.deltaTime,Space.World);
+       transform.Translate(Vector3.left * 10 * Time.deltaTime,Space.World);
         if (isAlive) 
         {
-            rigid.AddForce(new Vector3(0, jumpPower, 0));
-            //isAlive = false;
+            transform.Translate(Vector3.up*Time.deltaTime * speed);
+            rigid.useGravity = false;
         }
-        if (transform.position.y > 2)
+        if (transform.position.y > 2) 
+        {
             isAlive = false;
+            rigid.useGravity = true;
+        }
     }
 }
